@@ -16,42 +16,48 @@ public class Controller {
 
     private Dao dao = new DaoFileImpl();
 
-    public List<Item> getVendingMachineItems(){
-        return dao.getAllItems();
-    }
-
     public void run() {
+        initialViewing();
+
         boolean keepGoing = true;
         int menuSelection = 0;
         while (keepGoing) {
-            io.print("Main Menu");
-            io.print("1. List Student IDs");
-            io.print("5. Exit");
-
-            menuSelection = io.readInt("Please select from the"
-                    + " above choices.", 1, 5);
+            view.printMenuAndGetSelection();
+            menuSelection = view.getMenuSelection();
 
             switch (menuSelection) {
                 case 1:
-                    io.print("LIST STUDENTS");
+                    // add money
                     break;
                 case 2:
-                    io.print("CREATE STUDENT");
+                    // vend
                     break;
                 case 3:
-                    io.print("VIEW STUDENT");
-                    break;
-                case 4:
-                    io.print("REMOVE STUDENT");
-                    break;
-                case 5:
-                    keepGoing = false;
+                    // exit
                     break;
                 default:
-                    io.print("UNKNOWN COMMAND");
+                    // unknown command
             }
 
         }
-        io.print("GOOD BYE");
+        view.displayBye();
     }
+
+    public void initialViewing() {
+        view.displayBannerVendingMachine();
+        view.printVendingMachineSelection(dao.getAllItems());
+    }
+
+    public List<Item> getVendingMachineItems() {
+        return dao.getAllItems();
+    }
+
+    public void addMoney() {
+        view.displayBannerAddMoney();
+        double money = view.getMoneyToBeAdded();
+        double newBalance = dao.setMoney(money);
+        view.
+
+    }
+
 }

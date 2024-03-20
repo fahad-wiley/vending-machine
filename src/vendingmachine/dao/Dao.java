@@ -14,4 +14,7 @@ public interface Dao {
 
     Item removeItem(String itemName);
 
+    double getMoney();
+
+    double setMoney(double moneyToBeAdded);
 }
