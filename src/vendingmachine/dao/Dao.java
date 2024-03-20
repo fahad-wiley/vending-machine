@@ -16,5 +16,9 @@ public interface Dao {
 
     double getMoney();
 
-    double setMoney(double moneyToBeAdded);
+    double incrementBalance(double moneyToBeAdded);
+
+    double updateBalance(double newBalance);
+
+    public void decrementInventory(Item item);
 }

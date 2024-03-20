@@ -12,7 +12,6 @@ import java.util.List;
 public class Controller {
     private View view = new View();
     private UserIO io = new UserIOConsoleImpl();
-
     private Dao dao = new DaoFileImpl();
 
     public void run() {
@@ -31,21 +30,20 @@ public class Controller {
                     vendItem();
                     break;
                 case 3:
-                    // exit
+                    keepGoing=false;
                     break;
                 default:
-                    // unknown command
+                    view.displayUnknownCommand();
             }
-
         }
         view.displayBye();
     }
 
-
-
     public void viewVendingMachineContents() {
         view.displayBannerVendingMachine();
-        view.printVendingMachineSelection(dao.getAllItems());
+        for (Item item : dao.getAllItems()) {
+            view.printVendingMachineItem(item);
+        }
     }
     public void viewMenuSelection() {
         view.displayBannerMenuSelection();
@@ -59,7 +57,7 @@ public class Controller {
     public void addMoney() {
         view.displayBannerAddMoney();
         double money = view.getMoneyToBeAdded();
-        double newBalance = dao.setMoney(money);
+        double newBalance = dao.incrementBalance(money);
         view.displayCurrentBalance(newBalance);
     }
 
@@ -68,7 +66,10 @@ public class Controller {
         int chosenIdenitfier = view.getVendingSelection();
         // TODO: check valid vending option input
         Item chosenItem = dao.getItem(chosenIdenitfier);
-        //dao.
+        dao.decrementInventory(chosenItem);
+        view.displayVendedItem(chosenItem.getItemName());
+        double newBalance = (dao.getMoney())-(chosenItem.getItemCost());
+        dao.updateBalance(newBalance);
+        view.displayCurrentBalance(dao.getMoney());
     }
-
 }

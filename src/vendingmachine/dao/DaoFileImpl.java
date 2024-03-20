@@ -2,7 +2,6 @@ package vendingmachine.dao;
 
 import vendingmachine.dto.Item;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,13 +54,19 @@ public class DaoFileImpl implements Dao {
     }
 
     @Override
-    public double setMoney(double moneyToBeAdded) {
+    public double incrementBalance(double moneyToBeAdded) {
         vendingMachineBalance += moneyToBeAdded;
         return vendingMachineBalance;
     }
 
-    public void decrementInventory(int identifier) {
-        getItem()
+    @Override
+    public double updateBalance(double newBalance) {
+        vendingMachineBalance = newBalance;
+        return vendingMachineBalance;
+    }
+
+    public void decrementInventory(Item item) {
+        vendingMachine.put(item, vendingMachine.get(item)-1);
     }
 
 

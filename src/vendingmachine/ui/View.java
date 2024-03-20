@@ -23,11 +23,9 @@ public class View {
     public void displayBannerVendingMachine() {
         io.print("=== Vending Machine ===");
     }
-    public void printVendingMachineSelection(List<Item> vendingMachine){
+    public void printVendingMachineItem(Item item){
         // for each loop for all vending machine items
-        for(Item item : vendingMachine) {
-            io.print(item.getIdentifier() + ". " + item.getItemName() + " costs: " + item.getItemCost());
-        } // TODO: order identifiers
+        io.print(item.getIdentifier() + ". " + item.getItemName() + " costs: " + item.getItemCost());
     }
     public void displayBye() {
         io.print("GOOD BYE");
@@ -38,7 +36,7 @@ public class View {
         return io.readDouble("How much would you like to deposit?");
     }
     public void displayCurrentBalance(double currentBalance) {
-        io.print("Your current balance is : " + currentBalance);
+        io.print("Your current balance is now: " + currentBalance);
     }
     public void displayBannerAddMoney() {
         io.print("=== Add Money ===");
@@ -49,5 +47,13 @@ public class View {
 
     public int getVendingSelection() {
         return io.readInt("Choose your item.");
+    }
+
+    public void displayVendedItem(String itemName) {
+        io.print("Enjoy your " + itemName);
+    }
+
+    public void displayUnknownCommand() {
+        io.print("Unknown Command");
     }
 }
