@@ -43,10 +43,6 @@ public class DaoFileImpl implements Dao {
         return null;
     }
 
-    @Override
-    public Item removeItem(String itemName) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
     @Override
     public double getMoney() {

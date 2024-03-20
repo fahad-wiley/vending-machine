@@ -12,8 +12,6 @@ public interface Dao {
 
     Item getItem(int identifier);
 
-    Item removeItem(String itemName);
-
     double getMoney();
 
     double incrementBalance(double moneyToBeAdded);
