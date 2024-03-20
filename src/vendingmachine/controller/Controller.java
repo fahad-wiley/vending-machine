@@ -7,7 +7,6 @@ import vendingmachine.ui.UserIO;
 import vendingmachine.ui.UserIOConsoleImpl;
 import vendingmachine.ui.View;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
@@ -17,20 +16,19 @@ public class Controller {
     private Dao dao = new DaoFileImpl();
 
     public void run() {
-        initialViewing();
-
         boolean keepGoing = true;
         int menuSelection = 0;
         while (keepGoing) {
-            view.printMenuAndGetSelection();
+            viewVendingMachineContents();
+            viewMenuSelection();
             menuSelection = view.getMenuSelection();
 
             switch (menuSelection) {
                 case 1:
-                    // add money
+                    addMoney();
                     break;
                 case 2:
-                    // vend
+                    vendItem();
                     break;
                 case 3:
                     // exit
@@ -43,9 +41,15 @@ public class Controller {
         view.displayBye();
     }
 
-    public void initialViewing() {
+
+
+    public void viewVendingMachineContents() {
         view.displayBannerVendingMachine();
         view.printVendingMachineSelection(dao.getAllItems());
+    }
+    public void viewMenuSelection() {
+        view.displayBannerMenuSelection();
+        view.printMenuSelection();
     }
 
     public List<Item> getVendingMachineItems() {
@@ -56,8 +60,15 @@ public class Controller {
         view.displayBannerAddMoney();
         double money = view.getMoneyToBeAdded();
         double newBalance = dao.setMoney(money);
-        view.
+        view.displayCurrentBalance(newBalance);
+    }
 
+    private void vendItem() {
+        view.displayBannerVendItem();
+        int chosenIdenitfier = view.getVendingSelection();
+        // TODO: check valid vending option input
+        Item chosenItem = dao.getItem(chosenIdenitfier);
+        //dao.
     }
 
 }

@@ -10,7 +10,7 @@ public interface Dao {
 
     List<Item> getAllItems();
 
-    Item getItem(String itemName);
+    Item getItem(int identifier);
 
     Item removeItem(String itemName);
 

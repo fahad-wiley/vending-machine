@@ -37,8 +37,11 @@ public class DaoFileImpl implements Dao {
     }
 
     @Override
-    public Item getItem(String itemName) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Item getItem(int identifier) {
+        for(Item item : vendingMachine.keySet()) {
+            if(item.getIdentifier() == identifier) return item;
+        }
+        return null;
     }
 
     @Override
@@ -55,6 +58,10 @@ public class DaoFileImpl implements Dao {
     public double setMoney(double moneyToBeAdded) {
         vendingMachineBalance += moneyToBeAdded;
         return vendingMachineBalance;
+    }
+
+    public void decrementInventory(int identifier) {
+        getItem()
     }
 
 

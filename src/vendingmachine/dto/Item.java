@@ -1,10 +1,10 @@
 package vendingmachine.dto;
 
 public class Item {
+    private static int currentIdentifier = 1;
     private String itemName;
     private double itemCost; // todo: CHANGE TO BIG DECIMAL
-
-
+    private int identifier;
     public String getItemName() {
         return itemName;
     }
@@ -12,6 +12,7 @@ public class Item {
     public Item(String itemName, double itemCost) {
         this.itemName = itemName;
         this.itemCost = itemCost;
+        this.identifier = currentIdentifier++;
     }
 
     public void setItemName(String itemName) { // todo: POTENTIALLY REMOVE LATER
@@ -20,6 +21,10 @@ public class Item {
 
     public double getItemCost() {
         return itemCost;
+    }
+
+    public int getIdentifier() {
+        return identifier;
     }
 
     public void setItemCost(double itemCost) {
