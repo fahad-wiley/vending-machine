@@ -1,7 +1,7 @@
 package vendingmachine.dto;
 
 public class Item {
-    private static int currentIdentifier = 1;
+    public static int currentIdentifier = 1;
     private String itemName;
     private double itemCost; // todo: CHANGE TO BIG DECIMAL
     private int identifier;

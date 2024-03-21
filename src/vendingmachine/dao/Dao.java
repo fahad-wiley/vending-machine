@@ -5,6 +5,7 @@ import vendingmachine.dto.Item;
 import java.util.List;
 
 public interface Dao {
+    public double getVendingMachineBalance();
 
     List<Item> getAllItems();
 

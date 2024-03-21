@@ -7,7 +7,7 @@ import java.util.List;
 public interface ServiceLayer {
     List<Item> getAllItems() throws NoItemInventoryException;
 
-    Item getItem(int identifier) throws NoItemInventoryException;
+    Item getItem(int identifier) throws NoItemInventoryException, InvalidIdentifierException, InsufficientFundsException;
 
     double getMoney();
 

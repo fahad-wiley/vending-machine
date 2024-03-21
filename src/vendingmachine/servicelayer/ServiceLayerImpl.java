@@ -16,17 +16,23 @@ public class ServiceLayerImpl implements ServiceLayer {
     }
 
     @Override
-    public Item getItem(int identifier) throws NoItemInventoryException {
+    public Item getItem(int identifier) throws NoItemInventoryException, InvalidIdentifierException, InsufficientFundsException {
+        if(identifier < 1 || identifier > Item.currentIdentifier-1){
+            throw new InvalidIdentifierException("That's an invalid identifier.");
+        }
         int inventoryNumber = dao.getInventoryLevel(identifier);
         if (inventoryNumber <= 0) {
             throw new NoItemInventoryException("Item out of stock.");
+        }
+        if(dao.getVendingMachineBalance() < dao.getItem(identifier).getItemCost()){
+            throw new InsufficientFundsException("Not enough money.");
         }
         return dao.getItem(identifier);
     }
 
     @Override
     public double getMoney() {
-        return 0;
+        return dao.getMoney();
     }
 
     @Override
@@ -38,11 +44,12 @@ public class ServiceLayerImpl implements ServiceLayer {
     }
 
     @Override
-    public double updateBalance(double newBalance) throws InsufficientFundsException, NoItemInventoryException {
-        return 0;
+    public double updateBalance(double newBalance) {
+        return dao.updateBalance(newBalance);
     }
 
     @Override
     public void decrementInventory(Item item) {
+        dao.decrementInventory(item);
     }
 }

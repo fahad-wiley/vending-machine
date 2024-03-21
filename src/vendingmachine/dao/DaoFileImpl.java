@@ -22,6 +22,10 @@ public class DaoFileImpl implements Dao {
         vendingMachine.put(skittles, 7);
     }
 
+    public double getVendingMachineBalance() {
+        return vendingMachineBalance;
+    }
+
     @Override
     public List<Item> getAllItems() {
         List<Item> items = new ArrayList<>();
