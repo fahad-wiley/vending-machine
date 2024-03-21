@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface Dao {
 
-    Item addItem(Item item, int inventoryLevel);
-
     List<Item> getAllItems();
 
     Item getItem(int identifier);
@@ -19,4 +17,6 @@ public interface Dao {
     double updateBalance(double newBalance);
 
     public void decrementInventory(Item item);
+
+    public Integer getInventoryLevel(int identifier);
 }

@@ -3,6 +3,10 @@ package vendingmachine.controller;
 import vendingmachine.dao.Dao;
 import vendingmachine.dao.DaoFileImpl;
 import vendingmachine.dto.Item;
+import vendingmachine.servicelayer.InvalidMoneyInputException;
+import vendingmachine.servicelayer.NoItemInventoryException;
+import vendingmachine.servicelayer.ServiceLayer;
+import vendingmachine.servicelayer.ServiceLayerImpl;
 import vendingmachine.ui.UserIO;
 import vendingmachine.ui.UserIOConsoleImpl;
 import vendingmachine.ui.View;
@@ -13,7 +17,7 @@ import java.util.List;
 public class Controller {
     private View view = new View();
     private UserIO io = new UserIOConsoleImpl();
-    private Dao dao = new DaoFileImpl();
+    private ServiceLayer service = new ServiceLayerImpl();
 
     public void run() {
         boolean keepGoing = true;
@@ -40,9 +44,9 @@ public class Controller {
         view.displayBye();
     }
 
-    public void viewVendingMachineContents() {
+    public void viewVendingMachineContents() throws NoItemInventoryException {
         view.displayBannerVendingMachine();
-        for (Item item : dao.getAllItems()) {
+        for (Item item : service.getAllItems()) {
             view.printVendingMachineItem(item);
         }
     }
@@ -51,22 +55,22 @@ public class Controller {
         view.printMenuSelection();
     }
 
-    public List<Item> getVendingMachineItems() {
-        return dao.getAllItems();
+    public List<Item> getVendingMachineItems() throws NoItemInventoryException {
+        return service.getAllItems();
     }
 
-    public void addMoney() {
+    public void addMoney() throws InvalidMoneyInputException {
         view.displayBannerAddMoney();
         double money = view.getMoneyToBeAdded();
-        double newBalance = dao.incrementBalance(money);
+        double newBalance = service.incrementBalance(money);
         view.displayCurrentBalance(newBalance);
     }
 
-    private void vendItem() {
+    private void vendItem() throws NoItemInventoryException {
         view.displayBannerVendItem();
         int chosenIdenitfier = view.getVendingSelection();
         // TODO: check valid vending option input
-        Item chosenItem = dao.getItem(chosenIdenitfier);
+        Item chosenItem = service.getItem(chosenIdenitfier);
         dao.decrementInventory(chosenItem);
         view.displayVendedItem(chosenItem.getItemName());
         double newBalance = (dao.getMoney())-(chosenItem.getItemCost());

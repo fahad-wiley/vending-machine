@@ -23,12 +23,6 @@ public class DaoFileImpl implements Dao {
     }
 
     @Override
-    public Item addItem(Item item, int inventoryLevel) {
-        vendingMachine.put(item, inventoryLevel);
-        return item;
-    }
-
-    @Override
     public List<Item> getAllItems() {
         List<Item> items = new ArrayList<>();
         items.addAll(vendingMachine.keySet());
@@ -43,6 +37,10 @@ public class DaoFileImpl implements Dao {
         return null;
     }
 
+    @Override
+    public Integer getInventoryLevel(int identifier) {
+        return vendingMachine.get(getItem(identifier));
+    }
 
     @Override
     public double getMoney() {
