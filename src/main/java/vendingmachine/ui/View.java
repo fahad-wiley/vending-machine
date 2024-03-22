@@ -1,11 +1,14 @@
 package vendingmachine.ui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import vendingmachine.dto.Item;
 
 import java.util.HashMap;
 import java.util.List;
-
+@Component
 public class View {
+    @Autowired
     private UserIO io = new UserIOConsoleImpl();
 
     public void printMenuSelection() {

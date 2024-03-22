@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import vendingmachine.dao.Dao;
 import vendingmachine.dao.DaoFileImpl;
 import vendingmachine.dto.Item;
@@ -10,10 +12,13 @@ import vendingmachine.ui.View;
 
 import java.util.List;
 
-
+@Component
 public class Controller {
+    @Autowired
     private View view = new View();
+    @Autowired
     private UserIO io = new UserIOConsoleImpl();
+    @Autowired
     private ServiceLayer service = new ServiceLayerImpl();
 
     public void run() throws InvalidMoneyInputException, NoItemInventoryException, InvalidIdentifierException, InsufficientFundsException {

@@ -1,11 +1,12 @@
 package vendingmachine.dao;
 
+import org.springframework.stereotype.Component;
 import vendingmachine.dto.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+@Component
 public class DaoFileImpl implements Dao {
 
     private HashMap<Item, Integer> vendingMachine = new HashMap<>();

@@ -1,13 +1,15 @@
 package vendingmachine.servicelayer;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import vendingmachine.dao.Dao;
 import vendingmachine.dao.DaoFileImpl;
 import vendingmachine.dto.Item;
 
 import java.util.List;
-
+@Component
 public class ServiceLayerImpl implements ServiceLayer {
-
+    @Autowired
     Dao dao = new DaoFileImpl();
 
     @Override
